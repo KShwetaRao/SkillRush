@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Admin Redemptions - EG Cash{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4 text-center">Redemption Requests</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Transaction ID</th>
+            <th>User</th>
+            <th>Reward</th>
+            <th>Points</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tx in redemptions %}
+          <tr>
+            <td>{{ tx.transaction_id }}</td>
+            <td>{{ tx.user.username }}</td>
+            <td>{{ tx.name }}</td>
+            <td>{{ tx.points }}</td>
+            <td>{{ tx.date.strftime('%Y-%m-%d') }}</td>
+            <td><span class="badge bg-{{ 'warning' if tx.status == 'pending' else 'success' if tx.status == 'approved' else 'danger' }}">{{ tx.status|capitalize }}</span></td>
+            <td>
+              {% if tx.status == 'pending' %}
+              <form method="POST" action="/admin/redemptions" class="d-inline">
+                <input type="hidden" name="tx_id" value="{{ tx.id }}">
+                <button name="action" value="approve" class="btn btn-success btn-sm">Approve</button>
+                <button name="action" value="reject" class="btn btn-danger btn-sm">Reject</button>
+              </form>
+              {% else %}
+                <span class="text-muted">No actions</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% if not redemptions %}
+      <div class="alert alert-secondary text-center mt-4">No redemption requests found.</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %} 

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Leaderboard - EG Cash{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4 text-center">Leaderboard</h2>
+    <ul class="nav nav-tabs mb-4" id="leaderboardTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="points-tab" data-bs-toggle="tab" data-bs-target="#points" type="button" role="tab">Top by Points</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="referrals-tab" data-bs-toggle="tab" data-bs-target="#referrals" type="button" role="tab">Top by Referrals</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="leaderboardTabsContent">
+      <div class="tab-pane fade show active" id="points" role="tabpanel">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in top_points %}
+              <tr{% if current_user.is_authenticated and user.id == current_user.id %} class="table-primary"{% endif %}>
+                <td>{{ loop.index }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.full_name }}</td>
+                <td>{{ user.points }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="referrals" role="tabpanel">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Referrals</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in top_referrals %}
+              <tr{% if current_user.is_authenticated and user.id == current_user.id %} class="table-primary"{% endif %}>
+                <td>{{ loop.index }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.full_name }}</td>
+                <td>{{ user.referral_count }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} 

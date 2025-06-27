@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Referral Dashboard - EG Cash{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4 text-center">Referral Dashboard</h2>
+    <div class="alert alert-warning text-center" role="alert">
+      <strong>Anti-fraud Notice:</strong> Referrals must be real users. Fake or duplicate accounts will be banned and points revoked.
+    </div>
+    <div class="row mb-4">
+      <div class="col-md-4 mb-3">
+        <div class="card text-center border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Members Referred</h6>
+            <h3 class="fw-bold">{{ referred_count }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card text-center border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Referral Points Earned</h6>
+            <h3 class="fw-bold">{{ referral_points }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card text-center border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Your Referral Link</h6>
+            <div class="input-group">
+              <input type="text" class="form-control" id="referralLink" value="{{ referral_link }}" readonly>
+              <button class="btn btn-outline-secondary" type="button" onclick="copyReferralLink()">Copy</button>
+              <button class="btn btn-outline-primary" type="button" onclick="shareReferralLink()">Share</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-8">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="fw-bold mb-3">How to Refer & Earn</h5>
+            <ol>
+              <li>Share your unique referral link with friends.</li>
+              <li>Your friends sign up and complete their first task.</li>
+              <li>You both earn bonus points instantly!</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% block scripts %}
+<script>
+function copyReferralLink() {
+  var copyText = document.getElementById("referralLink");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  alert("Referral link copied!");
+}
+function shareReferralLink() {
+  var link = document.getElementById("referralLink").value;
+  if (navigator.share) {
+    navigator.share({ title: 'Join EG Cash!', url: link });
+  } else {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(link), '_blank');
+  }
+}
+</script>
+{% endblock %} 

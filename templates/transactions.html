@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Transactions - EG Cash{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4 text-center">Transactions</h2>
+    <div class="alert alert-info text-center mb-4">
+      <strong>Note:</strong> Payout requests are processed every Saturday.
+    </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <form class="d-flex" method="get">
+        <input class="form-control me-2" type="search" name="q" placeholder="Search transactions..." value="{{ request.args.get('q', '') }}">
+        <select class="form-select me-2" name="type">
+          <option value="">All Types</option>
+          <option value="redeem" {% if request.args.get('type') == 'redeem' %}selected{% endif %}>Redeem</option>
+          <option value="earn" {% if request.args.get('type') == 'earn' %}selected{% endif %}>Earn</option>
+        </select>
+        <select class="form-select me-2" name="status">
+          <option value="">All Status</option>
+          <option value="pending" {% if request.args.get('status') == 'pending' %}selected{% endif %}>Pending</option>
+          <option value="approved" {% if request.args.get('status') == 'approved' %}selected{% endif %}>Approved</option>
+          <option value="rejected" {% if request.args.get('status') == 'rejected' %}selected{% endif %}>Rejected</option>
+        </select>
+        <button class="btn btn-outline-primary" type="submit">Filter</button>
+      </form>
+      <a href="/redeem" class="btn btn-success">+ New Redeem</a>
+    </div>
+    {% if transactions %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Transaction ID</th>
+            <th>Name</th>
+            <th>Points</th>
+            <th>Date</th>
+            <th>User</th>
+            <th>Type</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tx in transactions %}
+          <tr>
+            <td>{{ tx.transaction_id }}</td>
+            <td>{{ tx.name }}</td>
+            <td>{{ tx.points }}</td>
+            <td>{{ tx.date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ tx.user.username }}</td>
+            <td>{{ tx.type|capitalize }}</td>
+            <td><span class="badge bg-{{ 'warning' if tx.status == 'pending' else 'success' if tx.status == 'approved' else 'danger' }}">{{ tx.status|capitalize }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="alert alert-secondary text-center">No transactions found.</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %} 

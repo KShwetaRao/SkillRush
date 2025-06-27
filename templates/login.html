@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Login - EG Cash{% endblock %}
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h3 class="mb-4 text-center">Login to Your Account</h3>
+            <form method="POST" action="/login">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+            <div class="mt-3 text-center">
+              <span>Don't have an account? <a href="/signup">Sign Up</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} 

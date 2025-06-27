@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Redeem Rewards - EG Cash{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4 text-center">Redeem Rewards</h2>
+    <div class="alert alert-info text-center mb-4">
+      All payout requests are processed weekly.
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <!-- PayPal $1 -->
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">PayPal</h5>
+            <p class="card-text">1000 Points = $1</p>
+            <form method="POST" action="/redeem">
+              <input type="hidden" name="reward" value="paypal_1">
+              <button type="submit" class="btn btn-primary w-100">REDEEM</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- PayPal $5 -->
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">PayPal</h5>
+            <p class="card-text">4500 Points = $5</p>
+            <form method="POST" action="/redeem">
+              <input type="hidden" name="reward" value="paypal_5">
+              <button type="submit" class="btn btn-primary w-100">REDEEM</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- PayTM ₹100 -->
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">PayTM</h5>
+            <p class="card-text">1000 Points = ₹100</p>
+            <form method="POST" action="/redeem">
+              <input type="hidden" name="reward" value="paytm_100">
+              <button type="submit" class="btn btn-primary w-100">REDEEM</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Amazon $2.5 -->
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">Amazon</h5>
+            <p class="card-text">3000 Points = $2.5</p>
+            <form method="POST" action="/redeem">
+              <input type="hidden" name="reward" value="amazon_2_5">
+              <button type="submit" class="btn btn-primary w-100">REDEEM</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Google Play $10 -->
+      <div class="col">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">Google Play</h5>
+            <p class="card-text">9000 Points = $10</p>
+            <form method="POST" action="/redeem">
+              <input type="hidden" name="reward" value="googleplay_10">
+              <button type="submit" class="btn btn-primary w-100">REDEEM</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} 

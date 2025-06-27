@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - EG Cash{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4 text-center">Dashboard</h2>
+    <!-- Stat Boxes -->
+    <div class="row mb-4 text-center">
+      <div class="col-md-3 mb-3">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Current Points</h6>
+            <h3 class="fw-bold">{{ user.points }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Total Earned</h6>
+            <h3 class="fw-bold">{{ total_earned }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Redeemed Points</h6>
+            <h3 class="fw-bold">{{ redeemed_points }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Members Referred</h6>
+            <h3 class="fw-bold">{{ referred_count }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Offerwall Tabs -->
+    <ul class="nav nav-tabs mb-3" id="offerwallTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="admantum-tab" data-bs-toggle="tab" data-bs-target="#admantum" type="button" role="tab">AdMantum</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="cpalead-tab" data-bs-toggle="tab" data-bs-target="#cpalead" type="button" role="tab">CPALead</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="wannads-tab" data-bs-toggle="tab" data-bs-target="#wannads" type="button" role="tab">Wannads</button>
+      </li>
+    </ul>
+    <div class="tab-content mb-4" id="offerwallTabsContent">
+      <div class="tab-pane fade show active p-4 bg-light border rounded" id="admantum" role="tabpanel">Offerwall integration coming soon...</div>
+      <div class="tab-pane fade p-4 bg-light border rounded" id="cpalead" role="tabpanel">Offerwall integration coming soon...</div>
+      <div class="tab-pane fade p-4 bg-light border rounded" id="wannads" role="tabpanel">Offerwall integration coming soon...</div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-md-6 mb-3">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body text-center">
+            <h5 class="fw-bold">Daily Check-In</h5>
+            <p>Check in daily to earn <span class="fw-bold">25 points</span>!</p>
+            <form method="POST" action="/daily-checkin">
+              <button type="submit" class="btn btn-success">Check In</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body text-center">
+            <h5 class="fw-bold">Refer & Earn</h5>
+            <p>Invite friends and earn bonus points for every successful referral!</p>
+            <a href="/referral-dashboard" class="btn btn-primary">Go to Referral Dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="fw-bold">Admin Announcements</h5>
+            <div class="alert alert-info mb-0">{{ announcement or 'No announcements at this time.' }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} 
